@@ -1,5 +1,4 @@
 // jcaisystems/jcai-website/src/components/ProofAndReason.tsx
-import { Card } from "@/components/ui/card";
 import { Quote, TrendingUp, Clock, DollarSign } from "lucide-react";
 
 export const ProofAndReason = () => {
@@ -31,16 +30,16 @@ export const ProofAndReason = () => {
   ];
 
   return (
-    <section id="proof" className="py-24 relative overflow-hidden bg-secondary/30">
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="proof">
+      <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-5xl font-bold mb-6">
             Real Businesses. <span className="gradient-text">Real Results.</span>
           </h2>
-          <p className="text-xl text-foreground leading-relaxed">
-            <span className="font-bold text-primary">Why is this free?</span> Simple: We let our results speak for themselves. Once you see what's possible, many of our clients ask us to build it for them.
+          <p className="text-xl">
+            <span className="font-bold" style={{ color: 'var(--primary-accent)' }}>Why is this free?</span> Simple: We let our results speak for themselves. Once you see what's possible, many of our clients ask us to build it for them.
           </p>
-           <p className="text-lg text-muted-foreground mt-4">
+           <p className="text-lg mt-4">
             You keep the entire blueprint regardless — no strings, no obligations.
           </p>
         </div>
@@ -48,36 +47,34 @@ export const ProofAndReason = () => {
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
           {stats.map((stat, index) => (
-            <Card 
+            <div
               key={index}
-              className="p-6 bg-card border-border text-center hover:border-primary/50 transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="card text-center"
             >
-              <stat.icon className="w-10 h-10 text-primary mx-auto mb-3" />
+              <stat.icon className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--primary-accent)' }} />
               <div className="text-4xl font-bold gradient-text mb-2">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </Card>
+              <p className="text-sm">{stat.label}</p>
+            </div>
           ))}
         </div>
 
         {/* Testimonials */}
         <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <Card 
+            <div
               key={index}
-              className="p-6 bg-gradient-to-br from-card to-card/50 border-border hover:border-primary/50 transition-all duration-300 animate-slide-up"
-              style={{ animationDelay: `${index * 0.15}s` }}
+              className="card"
             >
-              <Quote className="w-6 h-6 text-primary mb-3" />
-              <p className="text-foreground mb-4 leading-relaxed text-sm italic">"{testimonial.quote}"</p>
-              <div className="border-t border-border pt-3">
-                <div className="font-semibold text-foreground text-sm">{testimonial.author}</div>
-                <div className="text-xs text-muted-foreground mb-2">{testimonial.role}</div>
-                <div className="bg-primary/10 border border-primary/30 rounded px-2 py-1 inline-block">
-                  <span className="text-primary font-semibold text-xs">{testimonial.metric}</span>
+              <Quote className="w-6 h-6 mb-3" style={{ color: 'var(--primary-accent)' }} />
+              <p className="mb-4 text-sm italic" style={{color: 'var(--text-primary)'}} >"{testimonial.quote}"</p>
+              <div className="border-t pt-3" style={{ borderColor: 'var(--border-subtle)' }}>
+                <div className="font-semibold text-sm" style={{color: 'var(--text-primary)'}}>{testimonial.author}</div>
+                <div className="text-xs mb-2">{testimonial.role}</div>
+                <div className="rounded px-2 py-1 inline-block" style={{ backgroundColor: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                  <span className="font-semibold text-xs" style={{ color: 'var(--primary-accent)' }}>{testimonial.metric}</span>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
