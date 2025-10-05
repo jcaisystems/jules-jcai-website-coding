@@ -1,10 +1,5 @@
 // jcaisystems/jcai-website/src/components/RoiCalculator.tsx
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const RoiCalculator = () => {
   const [employees, setEmployees] = useState(3);
@@ -30,84 +25,101 @@ export const RoiCalculator = () => {
     }
   };
 
+  const ToggleButton = ({ value, children }: { value: 'monthly' | 'yearly', children: React.ReactNode }) => (
+    <button
+      onClick={() => setCalculationPeriod(value)}
+      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+        calculationPeriod === value
+          ? 'bg-primary-accent text-background-dark'
+          : 'bg-input-field-bg hover:bg-input-field-bg/80'
+      }`}
+      style={{
+        backgroundColor: calculationPeriod === value ? 'var(--primary-accent)' : '#111827',
+        color: calculationPeriod === value ? 'var(--background-dark)' : 'var(--text-primary)',
+        border: '1px solid var(--border-input)'
+      }}
+    >
+      {children}
+    </button>
+  );
+
   return (
-    <section className="py-24 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section>
+      <div className="container">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-5xl font-bold mb-4">
             Calculate Your Potential ROI
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto">
             See how much time and money you can save with automation.
           </p>
         </div>
-        <Card className="p-8 max-w-2xl mx-auto">
+        <div className="card max-w-2xl mx-auto">
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label htmlFor="employees">Number of Employees</Label>
-                <Input
+                <label htmlFor="employees" className="block mb-2 font-medium">Number of Employees</label>
+                <input
                   id="employees"
                   type="number"
                   value={employees}
                   onChange={(e) => setEmployees(parseInt(e.target.value) || 0)}
+                  className="input-field w-full"
                 />
               </div>
               <div>
-                <Label htmlFor="hourlyRate">Average Hourly Rate ($)</Label>
-                <Input
+                <label htmlFor="hourlyRate" className="block mb-2 font-medium">Average Hourly Rate ($)</label>
+                <input
                   id="hourlyRate"
                   type="number"
                   value={hourlyRate}
                   onChange={(e) => setHourlyRate(parseInt(e.target.value) || 0)}
+                  className="input-field w-full"
                 />
               </div>
             </div>
             <div>
-              <Label htmlFor="hoursSavedPerWeek">Hours Saved Per Employee Per Week</Label>
-              <Input
+              <label htmlFor="hoursSavedPerWeek" className="block mb-2 font-medium">Hours Saved Per Employee Per Week</label>
+              <input
                 id="hoursSavedPerWeek"
                 type="number"
                 value={hoursSavedPerWeek}
                 onChange={(e) => setHoursSavedPerWeek(parseInt(e.target.value) || 0)}
+                className="input-field w-full"
               />
             </div>
             <div className="flex flex-col items-center space-y-2">
-              <Label>Calculation Period</Label>
-              <ToggleGroup 
-                type="single" 
-                defaultValue="yearly" 
-                onValueChange={(value: 'monthly' | 'yearly') => value && setCalculationPeriod(value)}
-              >
-                <ToggleGroupItem value="monthly">Monthly</ToggleGroupItem>
-                <ToggleGroupItem value="yearly">Yearly</ToggleGroupItem>
-              </ToggleGroup>
+              <label className="font-medium">Calculation Period</label>
+              <div className="flex gap-2">
+                <ToggleButton value="monthly">Monthly</ToggleButton>
+                <ToggleButton value="yearly">Yearly</ToggleButton>
+              </div>
             </div>
-            <Button onClick={calculateSavings} className="w-full">
+            <button onClick={calculateSavings} className="cta-button w-full">
               Calculate Savings
-            </Button>
+            </button>
             {results && (
               <div className="text-center pt-6 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-2xl font-bold">Time Saved</p>
-                    <p className="text-4xl font-bold text-primary">
+                    <p className="text-4xl font-bold" style={{ color: 'var(--primary-accent)' }}>
                       {Math.round(results.time).toLocaleString()} hrs
                     </p>
-                    <p className="text-muted-foreground">per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
+                    <p>per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold">Money Saved</p>
-                    <p className="text-4xl font-bold text-primary">
+                    <p className="text-4xl font-bold" style={{ color: 'var(--primary-accent)' }}>
                       ${Math.round(results.money).toLocaleString()}
                     </p>
-                     <p className="text-muted-foreground">per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
+                     <p>per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
                   </div>
                 </div>
               </div>
             )}
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );
