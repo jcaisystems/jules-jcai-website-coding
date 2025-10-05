@@ -1,142 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --background: #334155; /* slate-700 */
+  --foreground: #e2e8f0; /* slate-200 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-dark: #020617;
-  --background-light: #0f172a;
-  --card-background: rgba(17, 24, 39, 0.5);
-  --primary-accent: #06b6d4;
-  --primary-accent-glow-soft: rgba(6, 182, 212, 0.08);
-  --primary-accent-glow-medium: rgba(6, 182, 212, 0.4);
-  --primary-accent-glow-strong: rgba(6, 182, 212, 0.7);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --border-subtle: rgba(148, 163, 184, 0.1);
-  --border-input: #374151;
-  --urgency-red: #ef4444;
+/* ADD THE FOLLOWING CODE BLOCK */
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent;
+  }
 }
+/* END OF ADDED CODE */
 
 body {
-  background-color: var(--background-dark);
-  background-image: linear-gradient(to bottom, var(--background-dark), var(--background-light));
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tilted Card Styles */
+.tilted-card-figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tilted-card-inner {
   position: relative;
 }
 
-body::before {
-  content: "";
+.tilted-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  border-radius: 1rem; /* 16px */
+  will-change: transform;
+}
+
+.tilted-card-caption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 4px 10px;
+  font-size: 10px;
+  color: #2d2d2d;
+  opacity: 0;
+  z-index: 3;
+}
+
+@media (max-width: 640px) {
+  .tilted-card-caption {
+    display: none;
+  }
+}
+
+/* FullPage.js Overrides for Dark Theme */
+body {
+  background-color: #111827; /* bg-gray-900 */
+}
+
+#fp-nav ul li a span, .fp-slidesNav ul li a span {
+  background: #f1f1f1 !important; /* Make navigation dots visible */
+}
+
+/* Ken Burns background animation */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.ken-burns {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.5;
+  object-fit: cover;
   z-index: -1;
+  opacity: 0.15;
+  animation: kenBurns 20s ease-in-out infinite alternate;
 }
 
-body::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 80vh;
-  background: radial-gradient(circle, var(--primary-accent-glow-soft) 0%, transparent 70%);
-  z-index: -1;
-}
-
-h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-
-h1 .highlight {
-  color: var(--primary-accent);
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-.feature-list-item {
+/* Ensure sections take up full viewport height within fullpage wrapper */
+.section {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
-
-/* Updated gradient-text to use the new design system's color variables */
-.gradient-text {
-  background-image: linear-gradient(to right, var(--primary-accent), #3b82f6, var(--primary-accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.cta-button {
-  background-color: var(--primary-accent);
-  color: var(--background-dark);
-  font-weight: 700;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px 0 var(--primary-accent-glow-medium),
-              0 0 25px 0 rgba(6, 182, 212, 0.3);
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px 0 var(--primary-accent-glow-strong),
-              0 0 35px 0 var(--primary-accent-glow-medium);
-}
-
-.card {
-  background-color: var(--card-background);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  text-align: center;
   padding: 2rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  position: relative;
 }
 
-.input-field {
-  background-color: #111827;
-  border: 1px solid var(--border-input);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  color: var(--text-primary);
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Helper for content within sections */
+.section-content {
+  max-width: 1000px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: var(--primary-accent);
-  box-shadow: 0 0 0 2px var(--primary-accent-glow-medium);
+@keyframes grid {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+.animate-grid {
+  animation: grid 15s linear infinite;
 }

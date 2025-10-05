@@ -2,20 +2,20 @@ from playwright.sync_api import sync_playwright, Page, expect
 
 def verify_blueprint_styling(page: Page):
     """
-    Navigates to the /blueprint page and takes a screenshot to show its current state.
+    Navigates to the /blueprint page and takes a screenshot to verify the restored styling.
     """
     # 1. Arrange: Go to the blueprint page.
     page.goto("http://localhost:3000/blueprint", wait_until="networkidle")
 
     # 2. Wait for the page to load by waiting for a key element.
     # The main headline is a good candidate.
-    expect(page.get_by_role("heading", name="Unlock 10+ Hours Weekly.")).to_be_visible(timeout=15000)
+    expect(page.get_by_role("heading", text="Unlock 10+ Hours Weekly.")).to_be_visible(timeout=20000)
 
     # Give animations time to settle
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     # 3. Screenshot: Capture the final result for visual verification.
-    page.screenshot(path="jules-scratch/verification/original_blueprint.png", full_page=True)
+    page.screenshot(path="jules-scratch/verification/blueprint-restored.png", full_page=True)
 
 def main():
     with sync_playwright() as p:
