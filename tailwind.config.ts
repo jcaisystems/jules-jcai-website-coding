@@ -52,6 +52,18 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        blueprint: {
+          background: "hsl(222, 47%, 5%)",
+          card: "hsl(222, 47%, 8%)",
+          primary: "hsl(195, 100%, 50%)",
+          "primary-foreground": "hsl(222, 47%, 5%)",
+          foreground: "hsl(210, 40%, 98%)",
+          "muted-foreground": "hsl(215, 20%, 65%)",
+          border: "hsl(222, 47%, 15%)",
+        }
+      },
+      backgroundImage: {
+        'gradient-hero': 'linear-gradient(to bottom, hsl(222 47% 5% / 0.9), hsl(195 100% 50% / 0.1) 50%, hsl(222 47% 5% / 0.9))',
       },
       borderRadius: {
         lg: "var(--radius)",

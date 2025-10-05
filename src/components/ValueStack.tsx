@@ -35,50 +35,54 @@ export const ValueStack = ({ onGetStarted }: ValueStackProps) => {
   ];
 
   return (
-    <section>
-      <div className="container">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6" style={{ backgroundColor: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)'}}>
-            <Sparkles className="w-4 h-4" style={{ color: 'var(--primary-accent)'}} />
-            <span className="text-sm font-medium" style={{ color: 'var(--primary-accent)'}}>Here's What You're Getting</span>
+    <section className="py-24 relative overflow-hidden bg-blueprint-background text-blueprint-foreground">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-blueprint-primary/10 border border-blueprint-primary/30 rounded-full px-4 py-2 mb-6">
+            <Sparkles className="w-4 h-4 text-blueprint-primary" />
+            <span className="text-sm font-medium text-blueprint-primary">Here's What You're Actually Getting</span>
           </div>
 
-          <h2 className="text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             Everything You Need to
-            <span className="gradient-text"> Reclaim Your Time</span>
+            <span className="bg-gradient-to-r from-blueprint-primary via-blue-400 to-blueprint-primary bg-clip-text text-transparent"> Reclaim Your Time</span>
           </h2>
-          <p className="text-xl">
-            This isn't a generic PDF. It's a custom-engineered blueprint for your specific business.
+          <p className="text-xl text-blueprint-muted-foreground">
+            Not a generic PDF. Not a course. A custom-engineered blueprint for your business.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto space-y-4 mb-12">
           {stackItems.map((item, index) => (
-            <div key={index} className="card">
-              <div className="feature-list-item">
-                <CheckCircle2 className="w-8 h-8 flex-shrink-0 mt-1" style={{ color: 'var(--primary-accent)'}} />
+            <div
+              key={index}
+              className="p-6 md:p-8 bg-blueprint-card border border-blueprint-border hover:border-blueprint-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-blueprint-primary/10 animate-slide-in-left hover:scale-105 rounded-lg"
+              style={{ animationDelay: `${index * 0.15}s` }}
+            >
+              <div className="flex items-start gap-4">
+                <CheckCircle2 className="w-8 h-8 text-blueprint-primary flex-shrink-0 mt-1" />
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="text-2xl font-bold">{item.title}</h3>
-                    <span className="font-semibold text-sm whitespace-nowrap" style={{ color: 'var(--primary-accent)'}}>{item.value}</span>
+                    <h3 className="text-xl md:text-2xl font-bold">{item.title}</h3>
+                    <span className="text-blueprint-primary font-semibold text-sm whitespace-nowrap">{item.value}</span>
                   </div>
-                  <p>{item.description}</p>
+                  <p className="text-blueprint-muted-foreground leading-relaxed">{item.description}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="max-w-4xl mx-auto rounded-2xl p-8 mb-8" style={{ background: 'linear-gradient(to right, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.05), rgba(6, 182, 212, 0.1))', border: '2px solid rgba(6, 182, 212, 0.3)' }}>
+        <div className="max-w-4xl mx-auto bg-gradient-to-r from-blueprint-primary/10 via-blueprint-primary/5 to-blueprint-primary/10 border-2 border-blueprint-primary/50 rounded-2xl p-8 mb-8">
           <div className="text-center">
-            <p className="text-4xl font-bold mb-2">
-              Total Value: <span className="gradient-text">$10,000</span>
+            <p className="text-3xl md:text-4xl font-bold mb-2">
+              Total Value: <span className="bg-gradient-to-r from-blueprint-primary via-blue-400 to-blueprint-primary bg-clip-text text-transparent">$10,000</span>
             </p>
-            <p className="text-3xl font-bold mb-4">
-              Your Price: <span style={{ color: 'var(--primary-accent)'}}>$0</span>
+            <p className="text-2xl md:text-3xl font-bold text-blueprint-foreground mb-4">
+              Your Price: <span className="text-blueprint-primary">$0</span>
             </p>
-            <p>
-              Delivered in 48 hours or less.
+            <p className="text-blueprint-muted-foreground text-lg">
+              Delivered in 48 hours or less
             </p>
           </div>
         </div>
@@ -86,10 +90,10 @@ export const ValueStack = ({ onGetStarted }: ValueStackProps) => {
         <div className="text-center">
           <button
             onClick={onGetStarted}
-            className="cta-button"
+            className="group bg-blueprint-primary text-blueprint-primary-foreground font-bold text-xl px-12 py-5 rounded-lg transition-all animate-wave-glow"
           >
             Yes! I Want My Free Blueprint
-            <ArrowRight className="inline-block ml-2 w-6 h-6" />
+            <ArrowRight className="inline-block w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>

@@ -30,16 +30,16 @@ export const ProofAndReason = () => {
   ];
 
   return (
-    <section id="proof">
-      <div className="container">
+    <section id="proof" className="py-24 relative overflow-hidden bg-blueprint-background text-blueprint-foreground">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-5xl font-bold mb-6">
-            Real Businesses. <span className="gradient-text">Real Results.</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Real Businesses. <span className="bg-gradient-to-r from-blueprint-primary via-blue-400 to-blueprint-primary bg-clip-text text-transparent">Real Results.</span>
           </h2>
-          <p className="text-xl">
-            <span className="font-bold" style={{ color: 'var(--primary-accent)' }}>Why is this free?</span> Simple: We let our results speak for themselves. Once you see what's possible, many of our clients ask us to build it for them.
+          <p className="text-xl leading-relaxed">
+            <span className="font-bold text-blueprint-primary">Why is this free?</span> Simple: We let our results speak for themselves. Once you see what's possible, many of our clients ask us to build it for them.
           </p>
-           <p className="text-lg mt-4">
+           <p className="text-lg text-blueprint-muted-foreground mt-4">
             You keep the entire blueprint regardless — no strings, no obligations.
           </p>
         </div>
@@ -49,11 +49,12 @@ export const ProofAndReason = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="card text-center"
+              className="p-6 bg-blueprint-card border border-blueprint-border text-center hover:border-blueprint-primary/50 transition-all duration-300 animate-fade-in rounded-lg"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <stat.icon className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--primary-accent)' }} />
-              <div className="text-4xl font-bold gradient-text mb-2">{stat.value}</div>
-              <p className="text-sm">{stat.label}</p>
+              <stat.icon className="w-10 h-10 text-blueprint-primary mx-auto mb-3" />
+              <div className="text-4xl font-bold bg-gradient-to-r from-blueprint-primary via-blue-400 to-blueprint-primary bg-clip-text text-transparent mb-2">{stat.value}</div>
+              <div className="text-sm text-blueprint-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -63,15 +64,16 @@ export const ProofAndReason = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="card"
+              className="p-6 bg-gradient-to-br from-blueprint-card to-blueprint-card/50 border border-blueprint-border hover:border-blueprint-primary/50 transition-all duration-300 animate-slide-up rounded-lg"
+              style={{ animationDelay: `${index * 0.15}s` }}
             >
-              <Quote className="w-6 h-6 mb-3" style={{ color: 'var(--primary-accent)' }} />
-              <p className="mb-4 text-sm italic" style={{color: 'var(--text-primary)'}} >"{testimonial.quote}"</p>
-              <div className="border-t pt-3" style={{ borderColor: 'var(--border-subtle)' }}>
-                <div className="font-semibold text-sm" style={{color: 'var(--text-primary)'}}>{testimonial.author}</div>
-                <div className="text-xs mb-2">{testimonial.role}</div>
-                <div className="rounded px-2 py-1 inline-block" style={{ backgroundColor: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
-                  <span className="font-semibold text-xs" style={{ color: 'var(--primary-accent)' }}>{testimonial.metric}</span>
+              <Quote className="w-6 h-6 text-blueprint-primary mb-3" />
+              <p className="text-blueprint-foreground mb-4 leading-relaxed text-sm italic">"{testimonial.quote}"</p>
+              <div className="border-t border-blueprint-border pt-3">
+                <div className="font-semibold text-blueprint-foreground text-sm">{testimonial.author}</div>
+                <div className="text-xs text-blueprint-muted-foreground mb-2">{testimonial.role}</div>
+                <div className="bg-blueprint-primary/10 border border-blueprint-primary/30 rounded px-2 py-1 inline-block">
+                  <span className="text-blueprint-primary font-semibold text-xs">{testimonial.metric}</span>
                 </div>
               </div>
             </div>

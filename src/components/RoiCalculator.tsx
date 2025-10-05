@@ -25,36 +25,34 @@ export const RoiCalculator = () => {
     }
   };
 
-  const ToggleButton = ({ value, children }: { value: 'monthly' | 'yearly', children: React.ReactNode }) => (
-    <button
-      onClick={() => setCalculationPeriod(value)}
-      className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-        calculationPeriod === value
-          ? 'bg-primary-accent text-background-dark'
-          : 'bg-input-field-bg hover:bg-input-field-bg/80'
-      }`}
-      style={{
-        backgroundColor: calculationPeriod === value ? 'var(--primary-accent)' : '#111827',
-        color: calculationPeriod === value ? 'var(--background-dark)' : 'var(--text-primary)',
-        border: '1px solid var(--border-input)'
-      }}
-    >
-      {children}
-    </button>
-  );
+  const ToggleButton = ({ value, children }: { value: 'monthly' | 'yearly', children: React.ReactNode }) => {
+    const isActive = calculationPeriod === value;
+    return (
+      <button
+        onClick={() => setCalculationPeriod(value)}
+        className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+          isActive
+            ? 'bg-blueprint-primary text-blueprint-primary-foreground'
+            : 'bg-blueprint-card hover:bg-blueprint-border'
+        }`}
+      >
+        {children}
+      </button>
+    );
+  };
 
   return (
-    <section>
-      <div className="container">
+    <section className="py-24 bg-blueprint-background text-blueprint-foreground">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Calculate Your Potential ROI
           </h2>
-          <p className="text-xl max-w-3xl mx-auto">
+          <p className="text-xl text-blueprint-muted-foreground max-w-3xl mx-auto">
             See how much time and money you can save with automation.
           </p>
         </div>
-        <div className="card max-w-2xl mx-auto">
+        <div className="p-8 max-w-2xl mx-auto bg-blueprint-card border border-blueprint-border rounded-lg">
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -64,7 +62,7 @@ export const RoiCalculator = () => {
                   type="number"
                   value={employees}
                   onChange={(e) => setEmployees(parseInt(e.target.value) || 0)}
-                  className="input-field w-full"
+                  className="w-full p-3 bg-blueprint-background border border-blueprint-border rounded-lg focus:border-blueprint-primary focus:ring-blueprint-primary"
                 />
               </div>
               <div>
@@ -74,7 +72,7 @@ export const RoiCalculator = () => {
                   type="number"
                   value={hourlyRate}
                   onChange={(e) => setHourlyRate(parseInt(e.target.value) || 0)}
-                  className="input-field w-full"
+                  className="w-full p-3 bg-blueprint-background border border-blueprint-border rounded-lg focus:border-blueprint-primary focus:ring-blueprint-primary"
                 />
               </div>
             </div>
@@ -85,7 +83,7 @@ export const RoiCalculator = () => {
                 type="number"
                 value={hoursSavedPerWeek}
                 onChange={(e) => setHoursSavedPerWeek(parseInt(e.target.value) || 0)}
-                className="input-field w-full"
+                className="w-full p-3 bg-blueprint-background border border-blueprint-border rounded-lg focus:border-blueprint-primary focus:ring-blueprint-primary"
               />
             </div>
             <div className="flex flex-col items-center space-y-2">
@@ -95,7 +93,7 @@ export const RoiCalculator = () => {
                 <ToggleButton value="yearly">Yearly</ToggleButton>
               </div>
             </div>
-            <button onClick={calculateSavings} className="cta-button w-full">
+            <button onClick={calculateSavings} className="w-full bg-blueprint-primary text-blueprint-primary-foreground font-bold py-3 rounded-lg animate-wave-glow">
               Calculate Savings
             </button>
             {results && (
@@ -103,17 +101,17 @@ export const RoiCalculator = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-2xl font-bold">Time Saved</p>
-                    <p className="text-4xl font-bold" style={{ color: 'var(--primary-accent)' }}>
+                    <p className="text-4xl font-bold text-blueprint-primary">
                       {Math.round(results.time).toLocaleString()} hrs
                     </p>
-                    <p>per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
+                    <p className="text-blueprint-muted-foreground">per {calculationPeriod}</p>
                   </div>
                   <div>
                     <p className="text-2xl font-bold">Money Saved</p>
-                    <p className="text-4xl font-bold" style={{ color: 'var(--primary-accent)' }}>
+                    <p className="text-4xl font-bold text-blueprint-primary">
                       ${Math.round(results.money).toLocaleString()}
                     </p>
-                     <p>per {calculationPeriod === 'monthly' ? 'month' : 'year'}</p>
+                     <p className="text-blueprint-muted-foreground">per {calculationPeriod}</p>
                   </div>
                 </div>
               </div>
