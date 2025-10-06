@@ -6,6 +6,8 @@ import { ValueStack } from "@/components/ValueStack";
 import { SignupForm } from "@/components/SignupForm";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { ProofAndReason } from "@/components/ProofAndReason";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const BlueprintPage = () => {
   const [showForm, setShowForm] = useState(false);
@@ -36,7 +38,10 @@ const BlueprintPage = () => {
       setSpotsLeft(parseInt(spotsInStorage));
     }
 
+    // Simulate a spot being claimed shortly after visiting
     const timer = setTimeout(decrementSpots, 5000);
+
+    // And another one a bit later to create urgency
     const timer2 = setTimeout(decrementSpots, 12000);
 
     return () => {
@@ -46,13 +51,17 @@ const BlueprintPage = () => {
   }, []);
 
   return (
-    <main>
-      <Hero onGetStarted={() => setShowForm(true)} spotsLeft={spotsLeft} />
-      <ValueStack onGetStarted={() => setShowForm(true)} />
-      <RoiCalculator />
-      <ProofAndReason />
-      {showForm && <SignupForm onClose={() => setShowForm(false)} />}
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero onGetStarted={() => setShowForm(true)} spotsLeft={spotsLeft} />
+        <ValueStack onGetStarted={() => setShowForm(true)} />
+        <RoiCalculator />
+        <ProofAndReason />
+        {showForm && <SignupForm onClose={() => setShowForm(false)} />}
+      </main>
+      <Footer />
+    </>
   );
 };
 
